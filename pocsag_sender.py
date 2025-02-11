@@ -18,18 +18,18 @@ import osmosdr
 import pocsag_generator
 
 class PocsagSender(gr.top_block):
-    def __init__(self, RIC=1122551, SubRIC=0, Text='Testmessage by HACRF One'):
+    def __init__(self, RIC=1122551, SubRIC=0, Text='Testmessage by HACRF One', pagerfreq=148625000, pocsagbitrate=2400):
         super().__init__("POCSAG Sender via HackRF")
         
         self.RIC = RIC
         self.SubRIC = SubRIC
         self.Text = Text
+        self.pagerfreq = pagerfreq
+        self.pocsagbitrate = pocsagbitrate
 
         self.tx_gain = 3
         self.symrate = 38400
         self.samp_rate = 12000000
-        self.pocsagbitrate = 2400
-        self.pagerfreq = 148625000
         self.max_deviation = 4500.0
         self.af_gain = 190
 
@@ -72,12 +72,14 @@ def parse_arguments():
     parser.add_argument('--RIC', type=int, default=1122551, help='Set RIC (default: 1122551)')
     parser.add_argument('--SubRIC', type=int, default=0, help='Set SubRIC (default: 0)')
     parser.add_argument('--Text', type=str, default='Testmessage by HACRF One', help='Set message text')
+    parser.add_argument('--pagerfreq', type=int, default=148625000, help='Set transmission frequency (default: 148625000 Hz)')
+    parser.add_argument('--pocsagbitrate', type=int, default=2400, help='Set POCSAG bitrate (default: 2400 bps)')
     return parser.parse_args()
 
 
 def main():
     args = parse_arguments()
-    tb = PocsagSender(RIC=args.RIC, SubRIC=args.SubRIC, Text=args.Text)
+    tb = PocsagSender(RIC=args.RIC, SubRIC=args.SubRIC, Text=args.Text, pagerfreq=args.pagerfreq, pocsagbitrate=args.pocsagbitrate)
     tb.start()
     tb.wait()
 

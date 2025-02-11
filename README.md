@@ -58,19 +58,17 @@ Si el dispositivo aparece listado, está correctamente configurado.
 1. Conecta el HackRF One a tu PC y asegúrate de que está detectado con `hackrf_info`.
 2. Ejecuta el script `pocsag_sender.py` con los parámetros deseados:
 
-```sh
-./pocsag_sender.py --RIC 1107305 --SubRIC 0 --Text "Mensaje de prueba"
-```
-
 ### Parámetros disponibles:
 - `--RIC`: Número RIC del receptor
 - `--SubRIC`: SubRIC del receptor
 - `--Text`: Mensaje POCSAG a enviar
+- `--pagerfreq`: Frecuencia del receptor
+- `--pocsagbitrate`: Bitrate del receptor
 
 Ejemplo:
 
 ```sh
-./pocsag_sender.py --RIC 1122551 --SubRIC 1 --Text "Prueba POCSAG"
+./pocsag_sender.py --RIC 1122551 --SubRIC 1 --Text "Hola Mundo" --pagerfreq 148625000 --pocsagbitrate 2400
 ```
 
 ## Solución de problemas
