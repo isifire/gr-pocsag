@@ -1,42 +1,88 @@
-# gr-pocsag: a gnuradio embedded python block for sending pocsag messages
+# POCSAG Sender via HackRF
 
-## Description:
-This is the alpha test release of gr-pocsag, a embedded python block for generating and
-sending pocsag message.
+Este proyecto permite enviar mensajes POCSAG utilizando GNU Radio y un HackRF One.
 
-The gnu-radio companion example uses a hackRF to send a pocsag-message
+## Requisitos
 
-The block generates the bitpattern for a POCSAG-message, broadcasts it once and then going into a loop
-to shut down the transmitter module of the HackRF.
+### Hardware:
+- HackRF One
+- Antena compatible
 
-The python code itself is located inside the pocsag_generator.py.
+### Software:
+- GNU Radio 3.10+
+- Python 3
+- OsmoSDR
+- NumPy
+- Bitstring
 
-## Install:
+## Instalación
 
-1. Install GNU Radio like : https://wiki.gnuradio.org/index.php/InstallingGR
+### 1. Instalar dependencias
 
-2. Install dependencies
+Ejecuta los siguientes comandos en la terminal:
+
+```sh
+sudo apt update && sudo apt install -y gnuradio python3-pip
+pip3 install numpy bitstring
 ```
-pip install numpy
-pip install bitstring
+
+Si usas Arch Linux:
+
+```sh
+sudo pacman -S gnuradio python-pip
+pip install numpy bitstring
 ```
 
-## Usage:
+### 2. Instalar y configurar OsmoSDR
 
-1. By import the pocsagsend.grc in GNU Radio.
-2. By call ./pocsag_sender.py --RIC %RIC --SUBRIC %SUBRIC% --TEST %TEXT%  (Please edit frequency in script)
+```sh
+sudo apt install -y gr-osmosdr
+```
 
-## Release-information:
+Verifica que GNU Radio detecta tu HackRF:
 
+```sh
+gnuradio-companion
+```
 
-+ Version: 0.0.1 (20180826)
-+ Version: 0.0.2 (20180828)
-+ Version: 0.0.3 (20181006) --> 
-+ Version: 0.0.4 (20181022) --> Add some Improvments + Changed Parameters and Varaibles + Remove WXGUI
+O ejecuta:
 
+```sh
+hackrf_info
+```
 
+Si el dispositivo aparece listado, está correctamente configurado.
 
+## Uso
 
-(C) Tauebenuss
-(C) Kristoff Bonne - ON1ARF
-This code is released under the GPL v3 license.
+1. Conecta el HackRF One a tu PC y asegúrate de que está detectado con `hackrf_info`.
+2. Ejecuta el script `pocsag_sender.py` con los parámetros deseados:
+
+```sh
+./pocsag_sender.py --RIC 1107305 --SubRIC 0 --Text "Mensaje de prueba"
+```
+
+### Parámetros disponibles:
+- `--RIC`: Número RIC del receptor
+- `--SubRIC`: SubRIC del receptor
+- `--Text`: Mensaje POCSAG a enviar
+
+Ejemplo:
+
+```sh
+./pocsag_sender.py --RIC 1122551 --SubRIC 1 --Text "Prueba POCSAG"
+```
+
+## Solución de problemas
+
+- **HackRF no detectado**: Ejecuta `hackrf_info` para verificar la conexión.
+- **GNU Radio no funciona**: Reinstala las dependencias con `sudo apt install --reinstall gnuradio`.
+- **Problemas de permisos**: Asegúrate de ejecutar con `sudo` si es necesario.
+
+## Créditos
+
+- Basado en el trabajo de ON1ARF & Tauebenuss
+
+## Licencia
+
+Este proyecto está licenciado bajo GPL v3.
