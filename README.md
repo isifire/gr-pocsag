@@ -5,7 +5,12 @@ Esta herramienta sirve para facilitar el envío de mensajes mediante comandos o 
 los parametros de nuestro busca y el mensaje que queramos enviar sin tediosas configuraciones o programas complejos.
 Por ahora no he podido eliminar las dependencias, pero espero poder hacerlo algún día.
 
-**Recomiendo usar la Maquina Virtual de [Instant GNURadio](https://github.com/bastibl/instant-gnuradio)**.
+**Recomiendo** usar la Maquina Virtual de [Instant GNURadio](https://github.com/bastibl/instant-gnuradio).
+
+### Ejemplo de un mensaje recibido en mi Biper:
+
+<img src="images/isi.jpg" alt="Descripción de la imagen" width="300">
+
 
 
 ## Requisitos
