@@ -42,6 +42,8 @@ class PocsagSender(gr.top_block):
         )
         self.pfb_arb_resampler.declare_sample_delay(0)
 
+        print(f"Mensaje a enviar: '{self.Text}' ({len(self.Text)} caracteres)")
+
         self.osmosdr_sink = osmosdr.sink(args="numchan=1 hackrf")
         self.osmosdr_sink.set_sample_rate(self.samp_rate)
         self.osmosdr_sink.set_center_freq(self.pagerfreq, 0)
@@ -79,6 +81,12 @@ def parse_arguments():
 
 def main():
     args = parse_arguments()
+    # Asegurar que el mensaje tenga un espacio al final y eliminar caracteres especiales
+    text = args.Text.strip().replace("\n", "").replace("\r", "").replace("\x04", "")  # Eliminar caracteres de control
+    if not text.endswith(" "):
+        text += " "  # Añadir un espacio al final si no lo tiene
+
+    print(f"Mensaje final enviado: '{text}' (longitud: {len(text)})")
     tb = PocsagSender(RIC=args.RIC, SubRIC=args.SubRIC, Text=args.Text, pagerfreq=args.pagerfreq, pocsagbitrate=args.pocsagbitrate)
     tb.start()
     tb.wait()

@@ -14,6 +14,7 @@ Este proyecto permite enviar mensajes POCSAG utilizando GNU Radio y un HackRF On
 - OsmoSDR
 - NumPy
 - Bitstring
+- PyQt6
 
 ## Instalación
 
@@ -22,15 +23,15 @@ Este proyecto permite enviar mensajes POCSAG utilizando GNU Radio y un HackRF On
 Ejecuta los siguientes comandos en la terminal:
 
 ```sh
-sudo apt update && sudo apt install -y gnuradio python3-pip
-pip3 install numpy bitstring
+sudo apt update && sudo apt install -y gnuradio python3-pip libxcb-cursor0
+pip3 install numpy bitstring PyQt6
 ```
 
 Si usas Arch Linux:
 
 ```sh
-sudo pacman -S gnuradio python-pip
-pip install numpy bitstring
+sudo pacman -S gnuradio python-pip xcb-util-cursor
+pip install numpy bitstring PyQt6
 ```
 
 ### 2. Instalar y configurar OsmoSDR
@@ -55,27 +56,48 @@ Si el dispositivo aparece listado, está correctamente configurado.
 
 ## Uso
 
+### Uso desde la línea de comandos
+
 1. Conecta el HackRF One a tu PC y asegúrate de que está detectado con `hackrf_info`.
 2. Ejecuta el script `pocsag_sender.py` con los parámetros deseados:
 
-### Parámetros disponibles:
+#### Parámetros disponibles:
 - `--RIC`: Número RIC del receptor
 - `--SubRIC`: SubRIC del receptor
-- `--Text`: Mensaje POCSAG a enviar
+- `--Text`: Mensaje POCSAG a enviar (se añade un espacio al final automáticamente)
 - `--pagerfreq`: Frecuencia del receptor
 - `--pocsagbitrate`: Bitrate del receptor
 
 Ejemplo:
 
 ```sh
-./pocsag_sender.py --RIC 1122551 --SubRIC 1 --Text "Hola Mundo" --pagerfreq 148625000 --pocsagbitrate 2400
+./pocsag_sender.py --RIC 1122551 --SubRIC 1 --Text "Hola Mundo " --pagerfreq 148625000 --pocsagbitrate 2400
 ```
+
+### Uso con la interfaz gráfica (GUI)
+
+1. Asegúrate de tener instaladas todas las dependencias de la GUI:
+
+```sh
+pip3 install PyQt6
+```
+
+2. Ejecuta la aplicación gráfica:
+
+```sh
+python3 pocsag_gui.py
+```
+
+3. Introduce los parámetros requeridos en los campos de entrada.
+4. Presiona el botón "Enviar" para transmitir el mensaje.
+5. La salida del proceso se mostrará en la consola de la interfaz.
 
 ## Solución de problemas
 
 - **HackRF no detectado**: Ejecuta `hackrf_info` para verificar la conexión.
 - **GNU Radio no funciona**: Reinstala las dependencias con `sudo apt install --reinstall gnuradio`.
 - **Problemas de permisos**: Asegúrate de ejecutar con `sudo` si es necesario.
+- **Problemas con la interfaz gráfica**: Asegúrate de haber instalado `libxcb-cursor0` en Debian/Ubuntu o `xcb-util-cursor` en Arch Linux.
 
 ## Créditos
 
@@ -84,3 +106,4 @@ Ejemplo:
 ## Licencia
 
 Este proyecto está licenciado bajo GPL v3.
+
