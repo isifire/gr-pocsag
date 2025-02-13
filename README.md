@@ -1,9 +1,12 @@
-# POCSAG Sender via HackRF
+# Friendly POCSAG Sender + HackRF
 
 Este proyecto permite enviar mensajes POCSAG a un Biper utilizando GNU Radio y un HackRF One como base.
 Esta herramienta sirve para facilitar el envío de mensajes mediante comandos o GUI, únicamente configurando
-los parametros de nuestro busca y el mensaje que queramos enviar, sin tediosas configuraciones o programas complejos,
-por ahora no he podido eliminar las dependencias, pero espero poder hacerlo algún día.
+los parametros de nuestro busca y el mensaje que queramos enviar sin tediosas configuraciones o programas complejos.
+Por ahora no he podido eliminar las dependencias, pero espero poder hacerlo algún día.
+
+**Recomiendo usar la Maquina Virtual de [Instant GNURadio](https://github.com/bastibl/instant-gnuradio)**.
+
 
 ## Requisitos
 
@@ -105,6 +108,12 @@ python3 pocsag_gui.py
 ## Créditos
 
 - Basado en el trabajo de ON1ARF & Tauebenuss.
+
+## Aviso
+
+No soy ingeniero en telecomunicaciones (quizá algún día) ni tampoco programador a tiempo completo, solo he adaptado mediante el uso de mis conocimientos
+y la IA, el programa original para mantenerlo actualizado y hacer que sea fácil de usar, ya que enviar un mensaje a mi Busca de Coca Cola ha sido un quebradero de cabeza,
+espero que sea útil aunque no lo he probado aún con otros modelos.
 
 ## Licencia
 
